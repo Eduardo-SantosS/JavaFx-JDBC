@@ -8,15 +8,14 @@ import gui.util.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.entities.Seller;
 import model.exceptions.ValidationException;
 import model.services.SellerService;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 public class SellerFormController implements Initializable {
@@ -29,12 +28,22 @@ public class SellerFormController implements Initializable {
 
     @FXML
     private TextField txtId;
-
     @FXML
     private TextField txtName;
-
     @FXML
-    private Label labelError;
+    private TextField txtEmail;
+    @FXML
+    private DatePicker dpBirthDate;
+    @FXML
+    private TextField txtBaseSalary;
+    @FXML
+    private Label labelErrorName;
+    @FXML
+    private Label labelErrorEmail;
+    @FXML
+    private Label labelErrorBirthDate;
+    @FXML
+    private Label labelErrorBaseSalary;
 
     @FXML
     private Button btnSave;
@@ -109,7 +118,10 @@ public class SellerFormController implements Initializable {
 
     private void initializeNodes(){
         Constraints.setTextFieldInteger(txtId);
-        Constraints.setTextFieldMaxLength(txtName, 30);
+        Constraints.setTextFieldMaxLength(txtName, 60);
+        Constraints.setTextFieldMaxLength(txtEmail, 50);
+        Constraints.setTextFieldDouble(txtBaseSalary);
+        Utils.formatDatePicker(dpBirthDate, "dd/MM/yyyy");
     }
 
     public void updateFormData(){
@@ -118,13 +130,19 @@ public class SellerFormController implements Initializable {
         }
         txtId.setText(String.valueOf(entity.getId()));
         txtName.setText(entity.getName());
+        txtEmail.setText(entity.getEmail());
+        if (entity.getBirthDate() != null) {
+            dpBirthDate.setValue(LocalDate.ofInstant(entity.getBirthDate().toInstant(), ZoneId.systemDefault()));
+        }
+        Locale.setDefault(Locale.US);
+        txtBaseSalary.setText(String.format("%.2f",entity.getBaseSalary()));
     }
 
     private void setErrorMessages(Map<String, String > errors){
         Set<String> fields = errors.keySet();
 
         if (fields.contains("Name")){
-            labelError.setText(errors.get("Name"));
+            labelErrorName.setText(errors.get("Name"));
         }
     }
 }
