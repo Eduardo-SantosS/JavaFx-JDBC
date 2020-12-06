@@ -3,8 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="343.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SellerFormController">
-    <GridPane layoutX="200.0" layoutY="155.0" prefHeight="313.0" prefWidth="600.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+<AnchorPane prefHeight="350.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SellerFormController">
+    <GridPane layoutX="200.0" layoutY="155.0" prefHeight="300.0" prefWidth="600.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="50.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="220.0" />
@@ -41,6 +41,8 @@
 
         <TextField fx:id="txtBaseSalary" GridPane.columnIndex="1" GridPane.rowIndex="4" />
         <Label fx:id="labelErrorBaseSalary" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+
+        <ComboBox fx:id="departmentComboBox" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
 
         <HBox prefHeight="50.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
